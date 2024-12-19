@@ -19,7 +19,9 @@ module Data.Binary.FloatCast
 
 #if MIN_VERSION_base(4,11,0)
 
+#if __GLASGOW_HASKELL__ <= 912
 import Data.Word (Word32, Word64)
+#endif
 import GHC.Float (castWord32ToFloat, castFloatToWord32, castWord64ToDouble, castDoubleToWord64)
 
 floatToWord :: Float -> Word32
@@ -39,7 +41,11 @@ wordToDouble = castWord64ToDouble
 {-# INLINE wordToDouble #-}
 
 #else
+
+#if __GLASGOW_HASKELL__ <= 912
 import Data.Word (Word32, Word64)
+#endif
+
 import Data.Array.ST (newArray, readArray, MArray, STUArray)
 import Data.Array.Unsafe (castSTUArray)
 import GHC.ST (runST, ST)

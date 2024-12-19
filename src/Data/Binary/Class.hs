@@ -50,9 +50,11 @@ module Data.Binary.Class (
 import Prelude hiding (Foldable(..))
 import Data.Foldable (Foldable(..))
 
-import Data.Word
 import Data.Bits
+#if __GLASGOW_HASKELL__ <= 912
+import Data.Word
 import Data.Int
+#endif
 import Data.Complex (Complex(..))
 #ifdef HAS_VOID
 import Data.Void
